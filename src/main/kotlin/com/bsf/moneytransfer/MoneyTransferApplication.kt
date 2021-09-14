@@ -1,4 +1,4 @@
-package com.example.moneytransfer
+package com.bsf.moneytransfer
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

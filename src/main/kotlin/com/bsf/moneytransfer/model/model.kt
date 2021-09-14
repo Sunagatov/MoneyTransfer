@@ -1,4 +1,4 @@
-package com.example.moneytransfer.model
+package com.bsf.moneytransfer.model
 
 import java.math.BigDecimal
 import javax.persistence.*
