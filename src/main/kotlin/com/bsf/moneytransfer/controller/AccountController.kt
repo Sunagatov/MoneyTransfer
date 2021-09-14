@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*
  */
 @RestController
 @RequestMapping("/account")
-class AccountController(val accountService: AccountService) {
+class AccountController(private val accountService: AccountService) {
 
     @GetMapping("/{id}")
     fun getAccountDetails(@PathVariable id: Long): ResponseEntity<Account> =
