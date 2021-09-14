@@ -1,6 +1,14 @@
 ## Money Transfer Service
 REST API for working with account operations
 
+### Technologies
+- Kotlin
+- Spring Boot
+- Maven
+- H2 in-memory database
+- Liquibase
+- JUnit
+
 **API**
 -
 **Create new account**
