@@ -17,22 +17,22 @@ import org.springframework.web.bind.annotation.*
 class AccountController(val accountService: AccountService) {
 
     @GetMapping("/{id}")
-    fun getAccountDetails(@PathVariable id: Long) =
-        accountService.getAccountDetails(id).let { ResponseEntity.ok() }
+    fun getAccountDetails(@PathVariable id: Long): ResponseEntity<Account> =
+        accountService.getAccountDetails(id).let { ResponseEntity.ok(it) }
 
     @PostMapping
-    fun createAccount(@RequestBody account: Account) =
+    fun createAccount(@RequestBody account: Account): ResponseEntity<Account> =
         accountService.createAccount(account).let { ResponseEntity.ok(it) }
 
     @PatchMapping("/transfer")
-    fun transferMoney(@RequestBody moneyTransferDetails: MoneyTransferDetails) =
+    fun transferMoney(@RequestBody moneyTransferDetails: MoneyTransferDetails): ResponseEntity.BodyBuilder =
         accountService.transferMoney(moneyTransferDetails).let { ResponseEntity.ok() }
 
     @PutMapping("/add")
-    fun addMoney(@RequestBody accountUpdateDetails: AccountUpdateDetails)=
+    fun addMoney(@RequestBody accountUpdateDetails: AccountUpdateDetails): ResponseEntity<Account> =
         accountService.addMoney(accountUpdateDetails).let { ResponseEntity.ok(it) }
 
     @PutMapping("/withdraw")
-    fun withdrawMoney(@RequestBody accountUpdateDetails: AccountUpdateDetails)=
+    fun withdrawMoney(@RequestBody accountUpdateDetails: AccountUpdateDetails): ResponseEntity<Account> =
         accountService.withdrawMoney(accountUpdateDetails).let { ResponseEntity.ok(it) }
 }
