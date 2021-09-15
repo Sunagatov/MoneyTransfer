@@ -121,6 +121,5 @@ class AccountController(private val accountService: AccountService) {
     fun deleteAccount(@Parameter(description = "Existed account id") @PathVariable id: Long): ResponseEntity<String> {
         accountService.deleteAccount(id)
         return ResponseEntity("Account with id=$id was deleted successfully", HttpStatus.OK)
-
     }
 }
