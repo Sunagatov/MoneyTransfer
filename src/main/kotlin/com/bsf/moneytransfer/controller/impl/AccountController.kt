@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*
 class AccountController(private val accountService: AccountService) {
 
     /**
-     * Get an existed account details.
+     * Get an existed account details
      *
      * @param id an existed account id
      * @return an account details
@@ -32,7 +32,7 @@ class AccountController(private val accountService: AccountService) {
     }
 
     /**
-     * Get all existed accounts.
+     * Get all existed accounts
      *
      * @return all existed accounts
      */
@@ -69,7 +69,7 @@ class AccountController(private val accountService: AccountService) {
     }
 
     /**
-     * Add money to an existed account.
+     * Add money to an existed account
      *
      * @param accountUpdateDetails add money data
      * @return an account details
@@ -82,7 +82,7 @@ class AccountController(private val accountService: AccountService) {
     }
 
     /**
-     * Withdraw money from an existed account.
+     * Withdraw money from an existed account
      *
      * @param accountUpdateDetails  withdraw money data
      * @return an account details
@@ -95,7 +95,7 @@ class AccountController(private val accountService: AccountService) {
     }
 
     /**
-     * Delete all existed accounts.
+     * Delete all existed accounts
      *
      * @return http status
      */
@@ -107,7 +107,7 @@ class AccountController(private val accountService: AccountService) {
     }
 
     /**
-     * Delete an existed account.
+     * Delete an existed account
      *
      * @param id an existed account id
      * @return http status
@@ -120,7 +120,7 @@ class AccountController(private val accountService: AccountService) {
     }
 
     /**
-     * Delete an existed account.
+     * Delete an existed account
      *
      * @param accountDetails account details
      * @return http status
