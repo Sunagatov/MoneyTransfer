@@ -8,6 +8,25 @@ REST API for working with account operations
 - H2 in-memory database
 - Liquibase
 - JUnit
+- Docker
+
+**Building**
+-
+    git clone https://github.com/Sunagatov/MoneyTransfer.git
+    cd MoneyTransfer
+    mvn clean install
+
+**Running**
+-
+    1) Build an docker image with the following command:
+         'docker build -t money-transfer .'
+
+    2) Then we can run it by running the following command:
+         'docker run -p 8080:8080 money-transfer'
+
+    3) Then we can open Money Transfer Service API by running the following command:
+         'start "" "http://localhost:8080/swagger-ui/"'
+    
 
 **API**
 -
