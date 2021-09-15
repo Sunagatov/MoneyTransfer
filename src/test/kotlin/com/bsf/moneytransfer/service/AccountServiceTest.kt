@@ -58,7 +58,6 @@ class AccountServiceTest {
     fun `test add money operation throws InvalidAccountUpdateDetailsException when amount is negative`() {
         val accountDetails = accountService.createAccount()
 
-
         assertThrows(InvalidAccountUpdateDetailsException::class.java) {
             accountService.addMoney(AccountUpdateDetails(accountId = accountDetails.id, amount = BigDecimal(-200)))
         }
