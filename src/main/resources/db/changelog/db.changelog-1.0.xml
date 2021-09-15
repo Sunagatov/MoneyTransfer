@@ -8,15 +8,20 @@
 
     <changeSet id="ins_01_01_01" author="zufar">
         <sql splitStatements="false" stripComments="false">
-            drop table if exists accounts;
-            create table if not exists accounts (
-            id bigserial primary key,
-            balance numeric(10,2)
+            drop table if exists transfer_money_account.accounts;
+
+            create table if not exists transfer_money_account.accounts (
+                id bigserial primary key,
+                balance numeric(10,2)
             );
 
-            comment on table accounts is 'Account details';
-            comment on column accounts.id is 'Unique identifier';
-            comment on column accounts.balance is 'Balance';
+            comment on table transfer_money_account.accounts is 'Account details';
+            comment on column transfer_money_account.accounts.id is 'Unique identifier';
+            comment on column transfer_money_account.accounts.balance is 'Balance';
+
+            insert into transfer_money_account.accounts (id, balance) values (1, 0.0);
+            insert into transfer_money_account.accounts (id, balance) values (2, 0.0);
+            insert into transfer_money_account.accounts (id, balance) values (3, 0.0);
         </sql>
     </changeSet>
 

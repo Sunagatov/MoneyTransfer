@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:transfer-money;INIT=RUNSCRIPT FROM 'classpath:create-schema.sql'
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+  h2:
+    console:
+      enabled: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    database: h2
+    show-sql: false
+
+
