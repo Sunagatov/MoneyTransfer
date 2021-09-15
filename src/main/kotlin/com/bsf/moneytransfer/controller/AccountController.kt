@@ -78,7 +78,7 @@ class AccountController(private val accountService: AccountService) {
      * @param accountUpdateDetails add money data
      * @return an account details
      */
-    @PutMapping("/add-money")
+    @PatchMapping("/add-money")
     @Operation(summary = "Add money to an existed account")
     fun addMoney(@Parameter(description = "Add money data") @RequestBody accountUpdateDetails: AccountUpdateDetails): ResponseEntity<Account> {
         val accountDetails = accountService.addMoney(accountUpdateDetails)
@@ -91,7 +91,7 @@ class AccountController(private val accountService: AccountService) {
      * @param accountUpdateDetails  withdraw money data
      * @return an account details
      */
-    @PutMapping("/withdraw")
+    @PatchMapping("/withdraw")
     @Operation(summary = "Withdraw money from an existed account by id")
     fun withdrawMoney(@Parameter(description = "Withdraw money data") @RequestBody accountUpdateDetails: AccountUpdateDetails): ResponseEntity<Account> {
         val accountDetails = accountService.withdrawMoney(accountUpdateDetails)
