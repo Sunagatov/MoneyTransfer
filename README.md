@@ -11,22 +11,35 @@ REST API for working with account operations
 
 **API**
 -
-**Create new account**
 
-    POST localhost:8080/account/
+**Get an existed account details**
 
-**Get account details**
+    GET localhost:8080/accounts/{id}
 
-    GET localhost:8080/account/{id}
+**Get all existed accounts**
 
-**Add money**
+    GET localhost:8080/accounts
 
-    PUT localhost:8080/account/add
+**Create a new account**
 
-**Transfer money**
+    POST localhost:8080/accounts
 
-    PATCH localhost:8080/account/transfer
+**Transfer money from one account to another**
 
-**Withdraw money**
+    PATCH localhost:8080/accounts/transfer-money
 
-    PUT localhost:8080/account/withdraw
+**Add money to an existed account**
+
+    PATCH localhost:8080/accounts/add-money
+
+**Withdraw money from an existed account**
+
+    PATCH localhost:8080/accounts/withdraw-money
+
+**Delete all existed accounts**
+
+    DELETE localhost:8080/accounts
+
+**Delete existed account by id**
+
+    DELETE localhost:8080/accounts/{id}
