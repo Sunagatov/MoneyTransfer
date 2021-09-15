@@ -123,17 +123,4 @@ class AccountController(private val accountService: AccountService) {
         return ResponseEntity("Account with id=$id was deleted successfully", HttpStatus.OK)
 
     }
-
-    /**
-     * Delete an existed account
-     *
-     * @param accountDetails account details
-     * @return http status with description
-     */
-    @DeleteMapping
-    @Operation(summary = "Delete an existed account by an existed account details")
-    fun deleteAccount(@Parameter(description = "Existed account details") @RequestBody accountDetails: Account): ResponseEntity<String> {
-        accountService.deleteAccount(accountDetails)
-        return ResponseEntity("Account with id=${accountDetails.id} was deleted successfully", HttpStatus.OK)
-    }
 }
