@@ -5,3 +5,6 @@ class InvalidTransferDetailsException(message: String?) : RuntimeException(messa
 class InvalidAccountDetailsException(message: String?) : RuntimeException(message)
 
 class InvalidAccountUpdateDetailsException(message: String?) : RuntimeException(message)
+
+class AbsentAccountException(message: String?) : RuntimeException(message)
+
