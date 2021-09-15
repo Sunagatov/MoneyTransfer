@@ -50,7 +50,8 @@ class AccountServiceImpl(private val accountRepository: AccountRepository) : Acc
     }
 
     @Transactional(readOnly = true)
-    override fun getAccountDetails(id: Long): Account = accountRepository.findById(id).orElseThrow { AbsentAccountException("The account with id=$id is absent") }
+    override fun getAccountDetails(id: Long): Account =
+        accountRepository.findById(id).orElseThrow { AbsentAccountException("The account with id=$id is absent") }
 
     @Transactional(readOnly = true)
     override fun getAllAccounts(): MutableList<Account> = accountRepository.findAll()
@@ -96,33 +97,28 @@ class AccountServiceImpl(private val accountRepository: AccountRepository) : Acc
         return accountDetailsAfterWithdraw
     }
 
-    @Transactional
     override fun createAccount(): Account {
         val newAccount = accountRepository.save(Account())
         log.info("New account with id=${newAccount.id} was created successfully")
         return newAccount
     }
 
-    @Transactional
     override fun createAccount(accountDetails: Account): Account {
         val newAccount = accountRepository.save(accountDetails)
         log.info("New account with id=${newAccount.id} was created successfully")
         return newAccount
     }
 
-    @Transactional
     override fun deleteAllAccounts() {
         accountRepository.deleteAll()
         log.info("All existed accounts were deleted successfully")
     }
 
-    @Transactional
     override fun deleteAccount(id: Long) {
         accountRepository.deleteById(id)
         log.info("Account with id=$id was deleted successfully")
     }
 
-    @Transactional
     override fun deleteAccount(accountDetails: Account) {
         accountRepository.delete(accountDetails)
         log.info("Account with id=${accountDetails.id} was deleted successfully")
