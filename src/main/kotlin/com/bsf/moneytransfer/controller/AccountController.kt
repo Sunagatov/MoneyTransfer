@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity
 interface AccountController {
 
     /**
-     * Get an existed account details.
+     * Get an existed account details
      *
      * @param id  an existed account id
      * @return an account details
@@ -21,7 +21,7 @@ interface AccountController {
     fun getAccountDetails(id: Long): ResponseEntity<Account>
 
     /**
-     * Get all existed accounts.
+     * Get all existed accounts
      *
      * @return all existed accounts
      */
@@ -43,7 +43,7 @@ interface AccountController {
     fun transferMoney(moneyTransferDetails: MoneyTransferDetails): ResponseEntity.BodyBuilder
 
     /**
-     * Add money to an existed account.
+     * Add money to an existed account
      *
      * @param accountUpdateDetails add money data
      * @return an account details
@@ -51,7 +51,7 @@ interface AccountController {
     fun addMoney(accountUpdateDetails: AccountUpdateDetails): ResponseEntity<Account>
 
     /**
-     * Withdraw money from an existed account.
+     * Withdraw money from an existed account
      *
      * @param accountUpdateDetails  withdraw money data
      * @return an account details
