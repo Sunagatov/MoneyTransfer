@@ -4,7 +4,9 @@ import java.math.BigDecimal
 import javax.persistence.*
 
 /**
- * Information about an account
+ * Account details
+ *
+ * @author Zufar Sunagatov (zufar.sunagatov@gmail.com)
  * */
 @Entity
 @Table(name = "accounts")
