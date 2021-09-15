@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="db.changelog-1.0.xml">
+
+    <changeSet id="ins_01_01_01" author="zufar">
+        <sql splitStatements="false" stripComments="false">
+            drop table if exists accounts;
+            create table if not exists accounts (
+            id bigserial primary key,
+            balance numeric(10,2)
+            );
+
+            comment on table accounts is 'Account details';
+            comment on column accounts.id is 'Unique identifier';
+            comment on column accounts.balance is 'Balance';
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
