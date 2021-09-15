@@ -7,13 +7,18 @@ import com.bsf.moneytransfer.exception.InvalidAccountDetailsException
 import com.bsf.moneytransfer.exception.InvalidAccountUpdateDetailsException
 import com.bsf.moneytransfer.exception.InvalidTransferDetailsException
 import com.bsf.moneytransfer.entity.Account
+import com.bsf.moneytransfer.exception.AbsentAccountException
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import java.math.BigDecimal
 
-
+/**
+ * Account operations tests
+ *
+ * @author Zufar Sunagatov (zufar.sunagatov@gmail.com)
+ */
 @SpringBootTest(classes = [MoneyTransferApplication::class])
 class AccountServiceTest {
 
@@ -30,8 +35,17 @@ class AccountServiceTest {
     @Test
     fun `test get account details operation is successful`() {
         val expectedAccountDetails = accountService.createAccount()
+
         val actualAccountDetails = accountService.getAccountDetails(expectedAccountDetails.id)
+
         assertEquals(expectedAccountDetails, actualAccountDetails)
+    }
+
+    @Test
+    fun `test get account details operation throws AbsentAccountException when account is absent`() {
+        assertThrows(AbsentAccountException::class.java) {
+            accountService.getAccountDetails(500)
+        }
     }
 
     @Test
@@ -41,7 +55,9 @@ class AccountServiceTest {
         val account2 = accountService.createAccount()
         val account3 = accountService.createAccount()
         val expectedAccounts: MutableList<Account> = mutableListOf(account1, account2, account3)
+
         val actualAccounts: MutableList<Account> = accountService.getAllAccounts()
+
         assertEquals(actualAccounts, expectedAccounts)
     }
 
@@ -49,8 +65,10 @@ class AccountServiceTest {
     fun `test add money operation is successful`() {
         val accountDetails = accountService.createAccount(Account(1, BigDecimal(300)))
         val expected = Account(accountDetails.id, BigDecimal(500))
+
         accountService.addMoney(AccountUpdateDetails(accountId = accountDetails.id, amount = BigDecimal(200)))
         val actual = accountService.getAccountDetails(accountDetails.id)
+
         assertEquals(expected, actual)
     }
 
@@ -130,7 +148,7 @@ class AccountServiceTest {
                             accountFromId = accountDetailsFrom.id,
                             accountToId = accountDetailsTo.id,
                             amount = BigDecimal(-200),
-                            description = ""
+                            description = "Transfer description"
                     ))
         }
     }
@@ -146,7 +164,7 @@ class AccountServiceTest {
                             accountFromId = accountDetailsFrom.id,
                             accountToId = accountDetailsTo.id,
                             amount = BigDecimal(200),
-                            description = ""
+                            description = "Transfer description"
                     ))
         }
     }
@@ -161,7 +179,7 @@ class AccountServiceTest {
                         accountFromId = accountDetailsFrom.id,
                         accountToId = accountDetailsTo.id,
                         amount = BigDecimal(200),
-                        description = ""
+                        description = "Transfer description"
                 ))
 
         val expectedAccountDetailFrom = Account(accountDetailsFrom.id, BigDecimal.ZERO)
