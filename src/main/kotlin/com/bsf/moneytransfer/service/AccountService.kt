@@ -37,6 +37,9 @@ class AccountService(private val accountRepository: AccountRepository) {
     @Transactional(readOnly = true)
     fun getAccountDetails(id: Long) = accountRepository.getById(id)
 
+    @Transactional(readOnly = true)
+    fun getAllAccounts(): MutableList<Account> = accountRepository.findAll()
+
     @Transactional(isolation = Isolation.REPEATABLE_READ)
     fun updateAccount(account: Account) = accountRepository.save(account)
 
@@ -62,5 +65,5 @@ class AccountService(private val accountRepository: AccountRepository) {
     }
 
     @Transactional
-    fun createAccount(account: Account) = accountRepository.save(account)
+    fun createAccount() = accountRepository.save(Account())
 }
