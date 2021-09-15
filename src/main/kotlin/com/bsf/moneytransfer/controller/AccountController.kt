@@ -3,94 +3,58 @@ package com.bsf.moneytransfer.controller
 import com.bsf.moneytransfer.model.Account
 import com.bsf.moneytransfer.model.AccountUpdateDetails
 import com.bsf.moneytransfer.model.MoneyTransferDetails
-import com.bsf.moneytransfer.service.AccountService
-import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.Parameter
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
 
 /**
  * Account operations endpoints
  *
  * @author Zufar Sunagatov (zufar.sunagatov@gmail.com)
  */
-@RestController
-@RequestMapping("/account")
-class AccountController(private val accountService: AccountService) {
+interface AccountController {
 
     /**
-     * Get existed account details.
+     * Get an existed account details.
      *
      * @param id  an existed account id
-     * @return account details
+     * @return an account details
      */
-    @GetMapping("/{id}")
-    @Operation(summary = "Get existed account details")
-    fun getAccountDetails(@Parameter(description = "Account id") @PathVariable id: Long) : ResponseEntity<Account> {
-        val accountDetails = accountService.getAccountDetails(id)
-        return ResponseEntity.ok(accountDetails)
-    }
+    fun getAccountDetails(id: Long): ResponseEntity<Account>
 
     /**
      * Get all existed accounts.
      *
      * @return all existed accounts
      */
-    @GetMapping
-    @Operation(summary = "Get all existed accounts")
-    fun getAllAccounts(): ResponseEntity<List<Account>> {
-        val allAccounts = accountService.getAllAccounts()
-        return ResponseEntity.ok(allAccounts)
-    }
+    fun getAllAccounts(): ResponseEntity<List<Account>>
 
     /**
-     * Create new account
+     * Create a new account
      *
-     * @return new account
+     * @return a new account
      */
-    @PostMapping
-    @Operation(summary = "Create new account")
-    fun createAccount(): ResponseEntity<Account> {
-        val newAccount = accountService.createAccount()
-        return ResponseEntity.ok(newAccount)
-    }
+    fun createAccount(): ResponseEntity<Account>
 
     /**
      * Transfer money from one account to another
      *
-     * @param moneyTransferDetails  transfer money data
-     * @return account details
+     * @param moneyTransferDetails transfer money data
+     * @return an account details
      */
-    @PatchMapping("/transfer")
-    @Operation(summary = "Transfer money from one account to another")
-    fun transferMoney(@Parameter(description = "Transfer money data") @RequestBody moneyTransferDetails: MoneyTransferDetails): ResponseEntity.BodyBuilder {
-        accountService.transferMoney(moneyTransferDetails)
-        return ResponseEntity.ok()
-    }
+    fun transferMoney(moneyTransferDetails: MoneyTransferDetails): ResponseEntity.BodyBuilder
 
     /**
      * Add money to an existed account.
      *
-     * @param accountUpdateDetails  add money data
-     * @return account details
+     * @param accountUpdateDetails add money data
+     * @return an account details
      */
-    @PutMapping("/add")
-    @Operation(summary = "Add money to an existed account")
-    fun addMoney(@Parameter(description = "Add money data") @RequestBody accountUpdateDetails: AccountUpdateDetails): ResponseEntity<Account> {
-        val accountDetails = accountService.addMoney(accountUpdateDetails)
-        return ResponseEntity.ok(accountDetails)
-    }
+    fun addMoney(accountUpdateDetails: AccountUpdateDetails): ResponseEntity<Account>
 
     /**
      * Withdraw money from an existed account.
      *
      * @param accountUpdateDetails  withdraw money data
-     * @return account details
+     * @return an account details
      */
-    @PutMapping("/withdraw")
-    @Operation(summary = "Withdraw money from an existed account by id")
-    fun withdrawMoney(@Parameter(description = "Withdraw money data") @RequestBody accountUpdateDetails: AccountUpdateDetails): ResponseEntity<Account> {
-        val accountDetails = accountService.withdrawMoney(accountUpdateDetails)
-        return ResponseEntity.ok(accountDetails)
-    }
+    fun withdrawMoney(accountUpdateDetails: AccountUpdateDetails): ResponseEntity<Account>
 }

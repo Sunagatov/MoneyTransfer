@@ -3,67 +3,58 @@ package com.bsf.moneytransfer.service
 import com.bsf.moneytransfer.model.Account
 import com.bsf.moneytransfer.model.AccountUpdateDetails
 import com.bsf.moneytransfer.model.MoneyTransferDetails
-import com.bsf.moneytransfer.repository.AccountRepository
-import com.bsf.moneytransfer.utils.validateAccountDetails
-import com.bsf.moneytransfer.utils.validateAccountUpdateDetails
-import com.bsf.moneytransfer.utils.validateTransferDetails
-import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Isolation
-import org.springframework.transaction.annotation.Transactional
 
 /**
  * Account operations
  *
  * @author Zufar Sunagatov (zufar.sunagatov@gmail.com)
  */
-@Service
-class AccountService(private val accountRepository: AccountRepository) {
+interface AccountService {
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
-    fun transferMoney(moneyTransferDetails: MoneyTransferDetails) {
-        val (accountFromId, accountToId, amount) = moneyTransferDetails.also(::validateTransferDetails)
+    /**
+     * Get existed account details.
+     *
+     * @param id an existed account id
+     * @return account details
+     */
+    fun getAccountDetails(id: Long): Account
 
-        val accountFromDetails = getAccountDetails(accountFromId)
-        accountFromDetails.balance -= amount
-        validateAccountDetails(accountFromDetails)
+    /**
+     * Get all existed accounts.
+     *
+     * @return all existed accounts
+     */
+    fun getAllAccounts(): MutableList<Account>
 
-        val accountToDetails = getAccountDetails(accountToId)
-        accountToDetails.balance += amount
+    /**
+     * Create new account
+     *
+     * @return new account
+     */
+    fun createAccount(): Account
 
-        updateAccount(accountFromDetails)
-        updateAccount(accountToDetails)
-    }
+    /**
+     * Transfer money from one account to another
+     *
+     * @param moneyTransferDetails  transfer money data
+     */
+    fun transferMoney(moneyTransferDetails: MoneyTransferDetails)
 
-    @Transactional(readOnly = true)
-    fun getAccountDetails(id: Long) = accountRepository.getById(id)
+    /**
+     * Add money to an existed account.
+     *
+     * @param accountUpdateDetails add money data
+     * @return account details
+     */
+    fun addMoney(accountUpdateDetails: AccountUpdateDetails): Account
 
-    @Transactional(readOnly = true)
-    fun getAllAccounts(): MutableList<Account> = accountRepository.findAll()
+    /**
+     * Withdraw money from an existed account.
+     *
+     * @param accountUpdateDetails withdraw money data
+     * @return account details
+     */
+    fun withdrawMoney(accountUpdateDetails: AccountUpdateDetails): Account
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
-    fun updateAccount(account: Account) = accountRepository.save(account)
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
-    fun addMoney(accountUpdateDetails: AccountUpdateDetails) = with(accountUpdateDetails) {
-        validateAccountUpdateDetails(accountUpdateDetails)
-
-        val accountDetails = getAccountDetails(accountId)
-        accountDetails.balance += amount
-
-        accountRepository.save(accountDetails)
-    }
-
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
-    fun withdrawMoney(accountUpdateDetails: AccountUpdateDetails) = with(accountUpdateDetails) {
-        validateAccountUpdateDetails(accountUpdateDetails)
-        val accountDetails = getAccountDetails(accountId)
-
-        accountDetails.balance -= amount
-        validateAccountDetails(accountDetails)
-
-        accountRepository.save(accountDetails)
-    }
-
-    @Transactional
-    fun createAccount() = accountRepository.save(Account())
 }
