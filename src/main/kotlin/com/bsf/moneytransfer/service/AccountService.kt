@@ -1,8 +1,8 @@
 package com.bsf.moneytransfer.service
 
-import com.bsf.moneytransfer.model.Account
-import com.bsf.moneytransfer.model.AccountUpdateDetails
-import com.bsf.moneytransfer.model.MoneyTransferDetails
+import com.bsf.moneytransfer.dto.AccountUpdateDetails
+import com.bsf.moneytransfer.dto.MoneyTransferDetails
+import com.bsf.moneytransfer.entity.Account
 
 /**
  * Account operations
@@ -36,7 +36,7 @@ interface AccountService {
     /**
      * Create new account with specific account details
      *
-     * @param accountDetails  account details for new account
+     * @param accountDetails account details for new account
      * @return new account
      */
     fun createAccount(accountDetails: Account): Account
@@ -63,7 +63,6 @@ interface AccountService {
      * @return account details
      */
     fun withdrawMoney(accountUpdateDetails: AccountUpdateDetails): Account
-
 
     /**
      * Delete all existed accounts

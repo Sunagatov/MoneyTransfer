@@ -1,12 +1,12 @@
 package com.bsf.moneytransfer.service
 
 import com.bsf.moneytransfer.MoneyTransferApplication
+import com.bsf.moneytransfer.dto.AccountUpdateDetails
+import com.bsf.moneytransfer.dto.MoneyTransferDetails
 import com.bsf.moneytransfer.exception.InvalidAccountDetailsException
 import com.bsf.moneytransfer.exception.InvalidAccountUpdateDetailsException
 import com.bsf.moneytransfer.exception.InvalidTransferDetailsException
-import com.bsf.moneytransfer.model.Account
-import com.bsf.moneytransfer.model.AccountUpdateDetails
-import com.bsf.moneytransfer.model.MoneyTransferDetails
+import com.bsf.moneytransfer.entity.Account
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

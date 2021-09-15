@@ -1,4 +1,4 @@
-package com.bsf.moneytransfer.model
+package com.bsf.moneytransfer.entity
 
 import java.math.BigDecimal
 import javax.persistence.*
@@ -15,18 +15,10 @@ data class Account(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) val i
             = (other is Account)
             && id == other.id
             && balance.stripTrailingZeros() == other.balance.stripTrailingZeros()
+
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        result = 31 * result + balance.hashCode()
+        return result
+    }
 }
-
-/**
- * Information about a money transfer
- * */
-data class MoneyTransferDetails(val accountFromId: Long,
-                                val accountToId: Long,
-                                val amount: BigDecimal,
-                                val description: String)
-
-/**
- * Information about an account update
- * */
-data class AccountUpdateDetails(val accountId: Long,
-                                val amount: BigDecimal)

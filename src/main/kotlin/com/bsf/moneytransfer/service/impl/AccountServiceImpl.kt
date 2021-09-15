@@ -1,8 +1,9 @@
 package com.bsf.moneytransfer.service.impl
 
-import com.bsf.moneytransfer.model.Account
-import com.bsf.moneytransfer.model.AccountUpdateDetails
-import com.bsf.moneytransfer.model.MoneyTransferDetails
+import com.bsf.moneytransfer.dto.AccountUpdateDetails
+import com.bsf.moneytransfer.dto.MoneyTransferDetails
+import com.bsf.moneytransfer.entity.Account
+import com.bsf.moneytransfer.exception.AbsentAccountException
 import com.bsf.moneytransfer.repository.AccountRepository
 import com.bsf.moneytransfer.service.AccountService
 import com.bsf.moneytransfer.utils.validateAccountDetails
@@ -27,9 +28,11 @@ class AccountServiceImpl(private val accountRepository: AccountRepository) : Acc
     @Transactional(isolation = Isolation.REPEATABLE_READ)
     override fun transferMoney(moneyTransferDetails: MoneyTransferDetails) {
         log.info("Transfer ${moneyTransferDetails.amount} money with description (${moneyTransferDetails.description})" +
-                " from the account (id ${moneyTransferDetails.accountFromId})" +
-                " to the account (id ${moneyTransferDetails.accountToId}) was started")
-        val (accountFromId, accountToId, amount) = moneyTransferDetails.also(::validateTransferDetails)
+                         " from the account (id ${moneyTransferDetails.accountFromId})" +
+                         " to the account (id ${moneyTransferDetails.accountToId}) was started")
+
+        validateTransferDetails(moneyTransferDetails)
+        val (accountFromId, accountToId, amount) = moneyTransferDetails
 
         val accountFromDetails = getAccountDetails(accountFromId)
         accountFromDetails.balance -= amount
@@ -42,12 +45,12 @@ class AccountServiceImpl(private val accountRepository: AccountRepository) : Acc
         updateAccount(accountToDetails)
 
         log.info("Transfer ${moneyTransferDetails.amount} money with description (${moneyTransferDetails.description})" +
-                " from the account (id ${moneyTransferDetails.accountFromId})" +
-                " to the account (id ${moneyTransferDetails.accountToId}) was finished successfully")
+                         " from the account (id ${moneyTransferDetails.accountFromId})" +
+                         " to the account (id ${moneyTransferDetails.accountToId}) was finished successfully")
     }
 
     @Transactional(readOnly = true)
-    override fun getAccountDetails(id: Long): Account = accountRepository.getById(id)
+    override fun getAccountDetails(id: Long): Account = accountRepository.findById(id).orElseThrow { AbsentAccountException("The account with id=$id is absent") }
 
     @Transactional(readOnly = true)
     override fun getAllAccounts(): MutableList<Account> = accountRepository.findAll()
@@ -70,8 +73,8 @@ class AccountServiceImpl(private val accountRepository: AccountRepository) : Acc
         val accountDetailsAfterAddedMoney = accountRepository.save(accountDetails)
 
         log.info("Added ${accountUpdateDetails.amount} money " +
-                " from the account (id ${accountUpdateDetails.accountId})" +
-                " was finished successfully")
+                         " from the account (id ${accountUpdateDetails.accountId})" +
+                         " was finished successfully")
 
         return accountDetailsAfterAddedMoney
     }
@@ -87,8 +90,8 @@ class AccountServiceImpl(private val accountRepository: AccountRepository) : Acc
         val accountDetailsAfterWithdraw = accountRepository.save(accountDetails)
 
         log.info("Withdraw ${accountUpdateDetails.amount} money " +
-                " from the account (id ${accountUpdateDetails.accountId})" +
-                " was finished successfully")
+                         " from the account (id ${accountUpdateDetails.accountId})" +
+                         " was finished successfully")
 
         return accountDetailsAfterWithdraw
     }

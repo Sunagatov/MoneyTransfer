@@ -1,11 +1,12 @@
-package com.bsf.moneytransfer.controller.impl
+package com.bsf.moneytransfer.controller
 
-import com.bsf.moneytransfer.model.Account
-import com.bsf.moneytransfer.model.AccountUpdateDetails
-import com.bsf.moneytransfer.model.MoneyTransferDetails
+import com.bsf.moneytransfer.dto.AccountUpdateDetails
+import com.bsf.moneytransfer.dto.MoneyTransferDetails
+import com.bsf.moneytransfer.entity.Account
 import com.bsf.moneytransfer.service.AccountService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -59,13 +60,16 @@ class AccountController(private val accountService: AccountService) {
      * Transfer money from one account to another
      *
      * @param moneyTransferDetails transfer money data
-     * @return http status
+     * @return http status with description
      */
     @PatchMapping("/transfer")
     @Operation(summary = "Transfer money from one account to another")
-    fun transferMoney(@Parameter(description = "Transfer money data") @RequestBody moneyTransferDetails: MoneyTransferDetails): ResponseEntity.BodyBuilder {
+    fun transferMoney(@Parameter(description = "Transfer money data") @RequestBody moneyTransferDetails: MoneyTransferDetails): ResponseEntity<String> {
         accountService.transferMoney(moneyTransferDetails)
-        return ResponseEntity.ok()
+
+        return ResponseEntity("Transfer ${moneyTransferDetails.amount} money with description (${moneyTransferDetails.description})" +
+                                      " from the account (id ${moneyTransferDetails.accountFromId})" +
+                                      " to the account (id ${moneyTransferDetails.accountToId}) was finished successfully", HttpStatus.OK)
     }
 
     /**
@@ -97,13 +101,13 @@ class AccountController(private val accountService: AccountService) {
     /**
      * Delete all existed accounts
      *
-     * @return http status
+     * @return http status with description
      */
     @DeleteMapping
     @Operation(summary = "Delete all existed accounts")
-    fun deleteAllAccount(): ResponseEntity.BodyBuilder {
+    fun deleteAllAccount(): ResponseEntity<String> {
         accountService.deleteAllAccounts()
-        return ResponseEntity.ok()
+        return ResponseEntity("All existed accounts were deleted successfully", HttpStatus.OK)
     }
 
     /**
@@ -114,21 +118,22 @@ class AccountController(private val accountService: AccountService) {
      */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete an existed account by id")
-    fun deleteAccount(@Parameter(description = "Existed account id") @PathVariable id: Long): ResponseEntity.BodyBuilder {
+    fun deleteAccount(@Parameter(description = "Existed account id") @PathVariable id: Long): ResponseEntity<String> {
         accountService.deleteAccount(id)
-        return ResponseEntity.ok()
+        return ResponseEntity("Account with id=$id was deleted successfully", HttpStatus.OK)
+
     }
 
     /**
      * Delete an existed account
      *
      * @param accountDetails account details
-     * @return http status
+     * @return http status with description
      */
     @DeleteMapping
     @Operation(summary = "Delete an existed account by an existed account details")
-    fun deleteAccount(@Parameter(description = "Existed account details") @RequestBody accountDetails: Account): ResponseEntity.BodyBuilder {
+    fun deleteAccount(@Parameter(description = "Existed account details") @RequestBody accountDetails: Account): ResponseEntity<String> {
         accountService.deleteAccount(accountDetails)
-        return ResponseEntity.ok()
+        return ResponseEntity("Account with id=${accountDetails.id} was deleted successfully", HttpStatus.OK)
     }
 }
