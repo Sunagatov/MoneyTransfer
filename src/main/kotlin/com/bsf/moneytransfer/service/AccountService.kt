@@ -12,7 +12,7 @@ import com.bsf.moneytransfer.model.MoneyTransferDetails
 interface AccountService {
 
     /**
-     * Get existed account details.
+     * Get existed account details
      *
      * @param id an existed account id
      * @return account details
@@ -20,7 +20,7 @@ interface AccountService {
     fun getAccountDetails(id: Long): Account
 
     /**
-     * Get all existed accounts.
+     * Get all existed accounts
      *
      * @return all existed accounts
      */
@@ -34,6 +34,14 @@ interface AccountService {
     fun createAccount(): Account
 
     /**
+     * Create new account with specific account details
+     *
+     * @param accountDetails  account details for new account
+     * @return new account
+     */
+    fun createAccount(accountDetails: Account): Account
+
+    /**
      * Transfer money from one account to another
      *
      * @param moneyTransferDetails  transfer money data
@@ -41,7 +49,7 @@ interface AccountService {
     fun transferMoney(moneyTransferDetails: MoneyTransferDetails)
 
     /**
-     * Add money to an existed account.
+     * Add money to an existed account
      *
      * @param accountUpdateDetails add money data
      * @return account details
@@ -49,7 +57,7 @@ interface AccountService {
     fun addMoney(accountUpdateDetails: AccountUpdateDetails): Account
 
     /**
-     * Withdraw money from an existed account.
+     * Withdraw money from an existed account
      *
      * @param accountUpdateDetails withdraw money data
      * @return account details
@@ -57,4 +65,22 @@ interface AccountService {
     fun withdrawMoney(accountUpdateDetails: AccountUpdateDetails): Account
 
 
+    /**
+     * Delete all existed accounts
+     */
+    fun deleteAllAccounts()
+
+    /**
+     * Delete existed account by id
+     *
+     * @param id existed account id
+     */
+    fun deleteAccount(id: Long)
+
+    /**
+     * Delete existed account by account details
+     *
+     * @param accountDetails account details
+     */
+    fun deleteAccount(accountDetails: Account)
 }

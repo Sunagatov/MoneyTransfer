@@ -9,7 +9,13 @@ import javax.persistence.*
 @Entity
 @Table(name = "accounts")
 data class Account(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long = 0,
-                   var balance: BigDecimal = BigDecimal.ZERO)
+                   var balance: BigDecimal = BigDecimal.ZERO) {
+
+    override fun equals(other: Any?)
+            = (other is Account)
+            && id == other.id
+            && balance.stripTrailingZeros() == other.balance.stripTrailingZeros()
+}
 
 /**
  * Information about a money transfer

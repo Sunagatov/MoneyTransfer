@@ -1,4 +1,4 @@
-package com.bsf.moneytransfer
+package com.bsf.moneytransfer.configuration
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
