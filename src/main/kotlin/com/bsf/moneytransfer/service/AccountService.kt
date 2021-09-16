@@ -12,17 +12,17 @@ import com.bsf.moneytransfer.entity.Account
 interface AccountService {
 
     /**
-     * Get existed account details
+     * Get existing account details
      *
-     * @param id an existed account id
+     * @param id an existing account id
      * @return account details
      */
     fun getAccountDetails(id: Long): Account
 
     /**
-     * Get all existed accounts
+     * Get all existing accounts
      *
-     * @return all existed accounts
+     * @return all existing accounts
      */
     fun getAllAccounts(): MutableList<Account>
 
@@ -49,7 +49,7 @@ interface AccountService {
     fun transferMoney(moneyTransferDetails: MoneyTransferDetails)
 
     /**
-     * Add money to an existed account
+     * Add money to an existing account
      *
      * @param accountUpdateDetails add money data
      * @return account details
@@ -57,7 +57,7 @@ interface AccountService {
     fun addMoney(accountUpdateDetails: AccountUpdateDetails): Account
 
     /**
-     * Withdraw money from an existed account
+     * Withdraw money from an existing account
      *
      * @param accountUpdateDetails withdraw money data
      * @return account details
@@ -65,19 +65,19 @@ interface AccountService {
     fun withdrawMoney(accountUpdateDetails: AccountUpdateDetails): Account
 
     /**
-     * Delete all existed accounts
+     * Delete all existing accounts
      */
     fun deleteAllAccounts()
 
     /**
-     * Delete existed account by id
+     * Delete existing account by id
      *
-     * @param id existed account id
+     * @param id existing account id
      */
     fun deleteAccount(id: Long)
 
     /**
-     * Delete existed account by account details
+     * Delete existing account by account details
      *
      * @param accountDetails account details
      */

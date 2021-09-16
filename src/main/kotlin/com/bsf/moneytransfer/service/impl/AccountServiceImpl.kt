@@ -111,7 +111,7 @@ class AccountServiceImpl(private val accountRepository: AccountRepository) : Acc
 
     override fun deleteAllAccounts() {
         accountRepository.deleteAll()
-        log.info("All existed accounts were deleted successfully")
+        log.info("All existing accounts were deleted successfully")
     }
 
     override fun deleteAccount(id: Long) {

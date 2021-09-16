@@ -31,11 +31,11 @@ REST API for working with account operations
 **API**
 -
 
-**Get an existed account details**
+**Get an existing account details**
 
     GET localhost:8080/accounts/{id}
 
-**Get all existed accounts**
+**Get all existing accounts**
 
     GET localhost:8080/accounts
 
@@ -47,18 +47,18 @@ REST API for working with account operations
 
     PATCH localhost:8080/accounts/transfer-money
 
-**Add money to an existed account**
+**Add money to an existing account**
 
     PATCH localhost:8080/accounts/add-money
 
-**Withdraw money from an existed account**
+**Withdraw money from an existing account**
 
     PATCH localhost:8080/accounts/withdraw-money
 
-**Delete all existed accounts**
+**Delete all existing accounts**
 
     DELETE localhost:8080/accounts
 
-**Delete existed account by id**
+**Delete existing account by id**
 
     DELETE localhost:8080/accounts/{id}

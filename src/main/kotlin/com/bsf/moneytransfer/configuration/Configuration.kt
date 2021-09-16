@@ -19,7 +19,7 @@ class SpringFoxConfig {
     fun api(): Docket =
         Docket(DocumentationType.SWAGGER_2)
             .select()
-            .apis( RequestHandlerSelectors.basePackage( "com.bsf.moneytransfer" ) )
+            .apis(RequestHandlerSelectors.basePackage("com.bsf.moneytransfer"))
             .paths(PathSelectors.any())
             .build()
 }

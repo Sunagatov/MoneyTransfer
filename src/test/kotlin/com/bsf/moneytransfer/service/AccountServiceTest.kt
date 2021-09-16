@@ -117,7 +117,7 @@ class AccountServiceTest {
     }
 
     @Test
-    fun `test delete existed account by id operation is successful`() {
+    fun `test delete existing account by id operation is successful`() {
         accountService.deleteAllAccounts()
         val accountDetails = accountService.createAccount()
 
@@ -127,7 +127,7 @@ class AccountServiceTest {
     }
 
     @Test
-    fun `test delete existed account by account details operation is successful`() {
+    fun `test delete existing account by account details operation is successful`() {
         accountService.deleteAllAccounts()
         val accountDetails = accountService.createAccount()
 
