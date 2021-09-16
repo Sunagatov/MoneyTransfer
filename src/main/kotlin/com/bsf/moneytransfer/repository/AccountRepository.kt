@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 /**
- * Account DAO
+ * CRUD operations on an account in database
  *
  * @author Zufar Sunagatov (zufar.sunagatov@gmail.com)
  */
