@@ -83,7 +83,6 @@ class AccountController(private val accountService: AccountService) {
     fun withdrawMoney(@Parameter(description = "Withdraw money data") @RequestBody accountUpdateDetails: AccountUpdateDetails): Account =
         accountService.withdrawMoney(accountUpdateDetails)
 
-
     /**
      * Delete all existing accounts
      *
