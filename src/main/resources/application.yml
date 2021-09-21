@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: transfar-name
   datasource:
     url: jdbc:h2:mem:transfer-money;INIT=RUNSCRIPT FROM 'classpath:create-schema.sql'
     driverClassName: org.h2.Driver
