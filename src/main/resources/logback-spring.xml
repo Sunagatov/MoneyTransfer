@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+
+        <withJansi>true</withJansi>
+
+        <encoder>
+            <pattern>
+                %d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight(${LOG_LEVEL_PATTERN:-%5p}) %magenta(${PID:- }) --- [%t]: %m ${LOG_EXCEPTION_CONVERSION_WORD:-%ex}%n
+            </pattern>
+        </encoder>
+
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>log/transfer-money-app.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>log/%d{yyyy-MM-dd}.transfer-money-app.log</fileNamePattern>
+            <!-- keep 30 days worth of history capped at 100MB total size -->
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>
+                %d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight(${LOG_LEVEL_PATTERN:-%5p}) %magenta(${PID:- }) --- [%t]: %m ${LOG_EXCEPTION_CONVERSION_WORD:-%ex}%n
+            </pattern>
+        </encoder>
+
+    </appender>
+
+    <logger name="org.springframework.ws" level="TRACE"/>
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springframework" level="ERROR"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
